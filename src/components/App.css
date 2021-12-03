@@ -1,3 +1,4 @@
+/* General styles */
 * {
   margin: 0;
   padding: 0;
@@ -21,6 +22,7 @@ label {
   font-weight: 600;
   font-size: 16px;
   display: block;
+  margin-bottom: 5px;
 }
 
 input {
@@ -40,6 +42,7 @@ input:focus {
   border: solid 2px hsl(172, 67%, 45%);
   outline: none;
 }
+
 .separator {
   margin-bottom: 30px;
 }
@@ -89,7 +92,9 @@ input:focus {
   width: 150px;
   cursor: pointer;
   padding: 5px;
+  margin: 0 auto;
 }
+
 .tip-btn:hover {
   background-color: hsl(172, 67%, 45%);
   color: hsl(183, 100%, 15%);
@@ -103,6 +108,10 @@ input:focus {
   color: hsl(186, 14%, 43%);
   text-align: right;
   cursor: text;
+  border: solid 2px #f3f8fb;
+}
+.tip-btn.custom-btn:focus {
+  border-color: hsl(172, 67%, 45%);
 }
 
 .people-input {
@@ -162,4 +171,53 @@ input:focus {
 .reset-btn.tip-btn:hover {
   color: hsl(183, 100%, 15%);
   background-color: #9fe8df;
+}
+
+@media only screen and (min-width: 980px) {
+  .app-container {
+    display: flex;
+    justify-content: space-between;
+    width: 800px;
+    margin: 0 auto;
+    padding: 50px;
+    border-radius: 20px;
+  }
+  .flex-container {
+    width: 45%;
+  }
+  .btn-grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+  .tip-btn {
+    font-size: 18px;
+    width: 90px;
+  }
+  .reset-btn.tip-btn {
+    margin-top: 100px;
+  }
+  .tip-btn.custom-btn {
+    text-align: center;
+  }
+}
+
+@media only screen and (min-width: 1200px) {
+  .app-container {
+    width: 1000px;
+  }
+  .tip-btn {
+    font-size: 24px;
+    width: 120px;
+  }
+  .reset-btn.tip-btn {
+    margin-top: 120px;
+  }
+  .total-container {
+    font-size: 45px;
+  }
+  .amount-total-container {
+    padding: 40px 40px;
+  }
+  .btn-grid {
+    margin-top: 10px;
+  }
 }

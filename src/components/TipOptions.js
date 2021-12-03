@@ -8,13 +8,13 @@ const TipOptions = (props) => {
         <button type="button" className="tip-btn">
           5%
         </button>
-        <button type="button" className="tip-btn">
+        <button type="button" className="tip-btn right-btn">
           10%
         </button>
         <button type="button" className="tip-btn">
           15%
         </button>
-        <button type="button" className="tip-btn">
+        <button type="button" className="tip-btn right-btn">
           25%
         </button>
         <button type="button" className="tip-btn">

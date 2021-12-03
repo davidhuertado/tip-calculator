@@ -12,10 +12,14 @@ class App extends React.Component {
       <div className="app">
         <img src={logo} className="logo" alt="logo" />
         <div className="app-container">
-          <BillInput />
-          <TipOptions />
-          <PeopleInput />
-          <AmountTotal />
+          <div className="flex-container">
+            <BillInput />
+            <TipOptions />
+            <PeopleInput />
+          </div>
+          <div className="flex-container">
+            <AmountTotal />
+          </div>
         </div>
       </div>
     );
