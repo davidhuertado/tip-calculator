@@ -103,6 +103,10 @@ input:focus {
   color: hsl(183, 100%, 15%);
   background-color: #9fe8df;
 }
+.tip-btn.active {
+  color: hsl(183, 100%, 15%);
+  background-color: #9fe8df;
+}
 .tip-btn.custom-btn {
   background-color: #f3f8fb;
   color: hsl(186, 14%, 43%);
