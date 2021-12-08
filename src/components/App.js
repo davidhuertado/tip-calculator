@@ -19,15 +19,14 @@ class App extends React.Component {
   }
   componentDidUpdate = (prevProps, prevState, snapshot) => {
     //Method for updating tip amount and total
-    const billDivisions = this.handleBillDivisions(this.state);
-    console.log(billDivisions);
-    console.log(this.state);
-    console.log(prevState);
+
+    // console.log(billDivisions);
+    // console.log(this.state);
+    // console.log(prevState);
     if (
       this.state.tipAmount !== prevState.tipAmount &&
       this.state.totalPerPerson !== prevState.totalPerPerson
     ) {
-      console.log('return');
       return;
     } else if (
       this.state.tipOption !== undefined &&
@@ -47,18 +46,29 @@ class App extends React.Component {
 
   handleBillDivisions = (state) => {
     let billDivisions = {};
-    const tipAmount = state.bill / state.tipOption / state.people;
+    console.log(state);
+    const tipAmount =
+      Math.round(((state.bill * state.tipOption) / 100 / state.people) * 100) /
+      100;
 
-    const totalPerPerson = state.bill / state.people + tipAmount;
+    const totalPerPerson =
+      Math.round((state.bill / state.people + tipAmount) * 100) / 100;
     billDivisions = { tipAmount, totalPerPerson };
-    console.log(billDivisions);
+
     return billDivisions;
   };
   // Bill input handlers
   handleBillChange = (newBill) => {
-    //Accept only numbers  > 0
     newBill = parseInt(newBill, 10);
 
+    //Delete all numbers
+    if (isNaN(newBill)) {
+      this.setState((state, props) => ({
+        bill: '',
+      }));
+    }
+
+    //Accept only numbers  > 0
     if (newBill >= 0 && this.state.tipOption === undefined) {
       this.setState((state, props) => {
         return { bill: newBill };
@@ -80,9 +90,13 @@ class App extends React.Component {
 
   //People input handlers
   handlePeopleChange = (newPeople) => {
-    //Accept only numbers  > 0
     newPeople = parseInt(newPeople, 10);
-    if (newPeople >= 0) {
+    //Delete all numbers
+    if (isNaN(newPeople)) {
+      this.setState((state, props) => ({
+        people: '',
+      }));
+    } else if (newPeople >= 0) {
       this.setState((state, props) => ({
         people: parseInt(newPeople, 10),
       }));
@@ -114,11 +128,21 @@ class App extends React.Component {
     }
   };
 
+  //Reset
+  handleResetClick = () => {
+    this.setState((state, props) => ({
+      bill: 0,
+      people: 0,
+      tipOption: undefined,
+      tipAmount: 0,
+      totalPerPerson: 0,
+    }));
+  };
+
   render() {
     return (
       <div className="app">
         <img src={logo} className="logo" alt="logo" />
-        <p>{this.state.tipOption}</p>
         <div className="app-container">
           <div className="flex-container">
             <BillInput
@@ -141,6 +165,7 @@ class App extends React.Component {
             <AmountTotal
               tipAmount={this.state.tipAmount}
               totalPerPerson={this.state.totalPerPerson}
+              handleResetClick={this.handleResetClick}
             />
           </div>
         </div>
