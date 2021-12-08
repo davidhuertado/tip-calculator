@@ -17,6 +17,34 @@ class App extends React.Component {
       totalPerPerson: 0,
     };
   }
+  componentDidUpdate = (prevProps, prevState, snapshot) => {
+    //Method for updating tip amount and total
+    const billDivisions = this.handleBillDivisions(this.state);
+    console.log(billDivisions);
+    console.log(this.state);
+    console.log(prevState);
+    if (
+      this.state.tipAmount !== prevState.tipAmount &&
+      this.state.totalPerPerson !== prevState.totalPerPerson
+    ) {
+      console.log('return');
+      return;
+    } else if (
+      this.state.tipOption !== undefined &&
+      this.state.people > 0 &&
+      this.state.bill > 0
+    ) {
+      const billDivisions = this.handleBillDivisions(this.state);
+
+      this.setState((state, props) => {
+        return {
+          tipAmount: billDivisions.tipAmount,
+          totalPerPerson: billDivisions.totalPerPerson,
+        };
+      });
+    }
+  };
+
   handleBillDivisions = (state) => {
     let billDivisions = {};
     const tipAmount = state.bill / state.tipOption / state.people;
@@ -39,30 +67,6 @@ class App extends React.Component {
       this.setState((state, props) => {
         return {
           bill: newBill,
-        };
-      });
-    }
-  };
-
-  componentDidUpdate = (prevProps, prevState, snapshot) => {
-    console.log(prevState);
-    if (
-      prevState.tipOption === this.state.tipOption &&
-      prevState.people === this.state.people &&
-      prevState.bill === this.state.bill
-    )
-      return;
-    else if (
-      prevState.tipOption !== undefined &&
-      prevState.people > 0 &&
-      prevState.bill > 0
-    ) {
-      const billDivisions = this.handleBillDivisions(this.state);
-      console.log(billDivisions);
-      this.setState((state, props) => {
-        return {
-          tipAmount: billDivisions.tipAmount,
-          totalPerPerson: billDivisions.totalPerPerson,
         };
       });
     }
