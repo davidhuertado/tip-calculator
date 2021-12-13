@@ -20,9 +20,7 @@ class App extends React.Component {
   componentDidUpdate = (prevProps, prevState, snapshot) => {
     //Method for updating tip amount and total
 
-    // console.log(billDivisions);
-    // console.log(this.state);
-    // console.log(prevState);
+    //Condiotional for avoiding infinite loop
     if (
       this.state.tipAmount !== prevState.tipAmount &&
       this.state.totalPerPerson !== prevState.totalPerPerson
@@ -46,7 +44,7 @@ class App extends React.Component {
 
   handleBillDivisions = (state) => {
     let billDivisions = {};
-    console.log(state);
+    // console.log(state);
     const tipAmount =
       Math.round(((state.bill * state.tipOption) / 100 / state.people) * 100) /
       100;
@@ -111,6 +109,7 @@ class App extends React.Component {
 
   //Tip options handlers
   handleTipClick = (e) => {
+    //Extract number of the HTML btn
     const btnContentArray = e.target.textContent.match(/\d/g);
     const btnNumber = parseInt(btnContentArray.join(''), 10);
 

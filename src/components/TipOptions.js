@@ -17,6 +17,7 @@ class TipOptions extends React.Component {
 
   render() {
     const tipArray = ['5%', '10%', '15%', '25%', '50%'];
+
     const tipList = tipArray.map((tip) => {
       let classToRender;
       if (tip === this.state.active) classToRender = 'tip-btn active';
@@ -27,11 +28,13 @@ class TipOptions extends React.Component {
           type="button"
           className={classToRender}
           onClick={this.handleTipClick}
+          key={tip}
         >
           {tip}
         </button>
       );
     });
+
     return (
       <div className="tip-options-container separator">
         <label>Select Tip %</label>
